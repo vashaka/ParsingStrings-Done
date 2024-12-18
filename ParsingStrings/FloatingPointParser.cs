@@ -13,7 +13,7 @@ namespace ParsingStrings
         /// <returns>true if <paramref name="str"/> was converted successfully; otherwise, false.</returns>
         public static bool TryParseFloat(string str, out float result)
         {
-            throw new NotImplementedException();
+            return float.TryParse(str, out result);
         }
 
         /// <summary>
@@ -23,8 +23,17 @@ namespace ParsingStrings
         /// <returns>A single-precision floating-point number equivalent to the numeric str or symbol specified in <paramref name="str"/>.  If a formatting error occurs returns NaN. </returns>
         public static float ParseFloat(string str)
         {
-            throw new NotImplementedException();
+            if (str == null)
+            {
+                throw new ArgumentNullException(nameof(str), "Input string cannot be null.");
+            }
 
+            if (float.TryParse(str, out float result))
+            {
+                return result;
+            }
+
+            return float.NaN;
         }
 
         /// <summary>
@@ -35,7 +44,7 @@ namespace ParsingStrings
         /// <returns>true if <paramref name="str"/> was converted successfully; otherwise, false.</returns>
         public static bool TryParseDouble(string str, out double result)
         {
-            throw new NotImplementedException();
+            return double.TryParse(str, out result);
         }
 
         /// <summary>
@@ -45,7 +54,17 @@ namespace ParsingStrings
         /// <returns>A double-precision floating-point number equivalent to the numeric str or symbol specified in <paramref name="str"/>. If a formatting error occurs returns Epsilon.</returns>
         public static double ParseDouble(string str)
         {
-            throw new NotImplementedException();
+            if (str == null)
+            {
+                throw new ArgumentNullException(nameof(str), "Input string cannot be null.");
+            }
+
+            if (double.TryParse(str, out double result))
+            {
+                return result;
+            }
+
+            return double.Epsilon;
         }
 
         /// <summary>
@@ -56,7 +75,7 @@ namespace ParsingStrings
         /// <returns>true if <paramref name="str"/> was converted successfully; otherwise, false.</returns>
         public static bool TryParseDecimal(string str, out decimal result)
         {
-            throw new NotImplementedException();
+            return decimal.TryParse(str, out result);
         }
 
         /// <summary>
@@ -66,7 +85,22 @@ namespace ParsingStrings
         /// <returns>The equivalent to the number contained in <paramref name="str"/>.</returns>
         public static decimal ParseDecimal(string str)
         {
-            throw new NotImplementedException();
+            if (str == null)
+            {
+                throw new ArgumentNullException(nameof(str), "Input string cannot be null.");
+            }
+
+            if (string.IsNullOrEmpty(str))
+            {
+                return -1.1m;  // Return -1.1m for empty strings
+            }
+
+            if (decimal.TryParse(str, out decimal result))
+            {
+                return result;
+            }
+
+            return 0m;
         }
     }
 }

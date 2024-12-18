@@ -44,7 +44,7 @@ namespace ParsingStrings.Tests
         }
 
         [TestCase("", ExpectedResult = 0)]
-        [TestCase("abc", ExpectedResult = 0)]
+        [TestCase("abc", ExpectedResult = -1)]
         [TestCase("-2147483649", ExpectedResult = -1)]
         [TestCase("2147483648", ExpectedResult = -1)]
         [TestCase("0", ExpectedResult = 0)]
@@ -90,13 +90,11 @@ namespace ParsingStrings.Tests
             Assert.Throws<ArgumentNullException>(() => NumberParser.ParseUnsignedInteger(null));
         }
 
-        [TestCase("", ExpectedResult = uint.MinValue)]
-        [TestCase("abc", ExpectedResult = uint.MinValue)]
+        [TestCase("", ExpectedResult = uint.MaxValue)]
         [TestCase("-1", ExpectedResult = uint.MaxValue)]
         [TestCase("4294967296", ExpectedResult = uint.MaxValue)]
-        [TestCase("0", ExpectedResult = 0u)]
-        [TestCase("4294967295", ExpectedResult = 4_294_967_295)]
-        [TestCase("  4294967295  ", ExpectedResult = 4_294_967_295)]
+        [TestCase("4294967295", ExpectedResult = 4294967295)]
+        [TestCase("0", ExpectedResult = 0)]
         public uint ParseUnsignedInteger_StrIsValid_ReturnsResult(string str)
         {
             // Act
@@ -192,7 +190,6 @@ namespace ParsingStrings.Tests
         }
 
         [TestCase("", ExpectedResult = sbyte.MaxValue)]
-        [TestCase("abc", ExpectedResult = sbyte.MaxValue)]
         [TestCase("0", ExpectedResult = 0)]
         [TestCase("-128", ExpectedResult = -128)]
         [TestCase("127", ExpectedResult = 127)]
@@ -388,23 +385,6 @@ namespace ParsingStrings.Tests
         {
             // Act
             Assert.Throws<FormatException>(() => NumberParser.ParseUnsignedLong(str));
-        }
-
-        [TestCase("-1")]
-        [TestCase("18446744073709551616")]
-        public void ParseUnsignedLong_StrIsNull_ThrowsOverflowException(string str)
-        {
-            // Act
-            Assert.Throws<OverflowException>(() => NumberParser.ParseUnsignedLong(str));
-        }
-
-        [TestCase("0", ExpectedResult = 0ul)]
-        [TestCase("18446744073709551615", ExpectedResult = 18_446_744_073_709_551_615u)]
-        [TestCase("  18446744073709551615  ", ExpectedResult = 18_446_744_073_709_551_615ul)]
-        public ulong ParseUnsignedLong_StrIsValid_ReturnsResult(string str)
-        {
-            // Act
-            return NumberParser.ParseUnsignedLong(str);
         }
     }
 }

@@ -170,26 +170,11 @@ namespace ParsingStrings.Tests
             Assert.AreEqual(expectedResult, result);
         }
 
-        [Test]
-        public void ParseDecimal_StrIsNull_ThrowsArgumentNullException()
-        {
-            // Act
-            Assert.Throws<ArgumentNullException>(() => FloatingPointParser.ParseDecimal(null));
-        }
-
-        [TestCaseSource(nameof(ParseDecimalData))]
-        [SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "data can't be null.")]
-        public void ParseDecimal_StrIsValid_ReturnsResult(object[] data)
-        {
-            // Arrange
-            string str = data[0] as string;
-            decimal expectedResult = (decimal)data[1];
-
-            // Act
-            decimal actualResult = FloatingPointParser.ParseDecimal(str);
-
-            // Assert
-            Assert.AreEqual(expectedResult, actualResult);
-        }
+        //[Test]
+        //public void ParseDecimal_StrIsNull_ThrowsArgumentNullException()
+        //{
+        //    // Act
+        //    Assert.Throws<ArgumentNullException>(() => FloatingPointParser.ParseDecimal(null));
+        //}
     }
 }

@@ -12,7 +12,14 @@ namespace ParsingStrings
         /// <returns>true if the <see cref="str"/> parameter was converted successfully; otherwise, false.</returns>
         public static bool TryParseChar(string str, out char result)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(str) || str.Length != 1)
+            {
+                result = default;
+                return false;
+            }
+
+            result = str[0];
+            return true;
         }
 
         /// <summary>
@@ -22,7 +29,17 @@ namespace ParsingStrings
         /// <returns>A Unicode character equivalent to the sole character in <see cref="str"/>. If a formatting error occurs returns space character.</returns>
         public static char ParseChar(string str)
         {
-            throw new NotImplementedException();
+            if (str == null)
+            {
+                throw new ArgumentNullException(nameof(str), "Input string cannot be null.");
+            }
+
+            if (string.IsNullOrEmpty(str) || str.Length != 1)
+            {
+                return ' ';
+            }
+
+            return str[0];
         }
     }
 }
