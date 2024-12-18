@@ -92,7 +92,7 @@ namespace ParsingStrings
 
             if (string.IsNullOrEmpty(str))
             {
-                return -1.1m;  // Return -1.1m for empty strings
+                return -1.1m;
             }
 
             if (decimal.TryParse(str, out decimal result))

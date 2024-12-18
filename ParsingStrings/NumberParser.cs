@@ -29,24 +29,20 @@ namespace ParsingStrings
                 throw new ArgumentNullException(nameof(str), "Input string cannot be null.");
             }
 
-            // If the string is empty or contains only whitespace, return 0
             if (string.IsNullOrWhiteSpace(str))
             {
                 return 0;
             }
 
-            // Try parsing the string as an integer
             if (int.TryParse(str, out int result))
             {
-                // Check if the number is within the valid range for an int
                 if (result < int.MinValue || result > int.MaxValue)
                 {
-                    return -1; // Outside the valid range for int
+                    return -1;
                 }
                 return result;
             }
 
-            // Return -1 for any invalid input (e.g., non-numeric strings or out-of-range numbers)
             return -1;
         }
 
@@ -81,21 +77,20 @@ namespace ParsingStrings
 
             if (string.IsNullOrWhiteSpace(str))
             {
-                // Handle empty or whitespace-only strings
-                return uint.MaxValue;  // Or another value depending on your requirement
+                return uint.MaxValue;
             }
 
             // Handle negative numbers explicitly
             if (str.StartsWith("-"))
             {
-                return uint.MaxValue;  // Return uint.MaxValue for negative input
+                return uint.MaxValue;
             }
 
             if (ulong.TryParse(str, out ulong result))
             {
                 if (result > uint.MaxValue)
                 {
-                    return uint.MaxValue;  // Return uint.MaxValue if overflow
+                    return uint.MaxValue;
                 }
 
                 return (uint)result;
@@ -379,7 +374,6 @@ namespace ParsingStrings
 
             if (ulong.TryParse(str, out ulong result))
             {
-                // Check for overflow if the number is larger than ulong.MaxValue
                 if (result > ulong.MaxValue)
                 {
                     throw new OverflowException("Input string represents a number larger than the maximum allowed for unsigned long.");
